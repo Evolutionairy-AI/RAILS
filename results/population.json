@@ -1,0 +1,98 @@
+{
+  "n_per_point": 20000,
+  "forge_up": [
+    {
+      "sophistication": 0.0,
+      "intake_catch_rate": 1.0,
+      "truth_breach_rate": 0.0,
+      "floor_violations": 0
+    },
+    {
+      "sophistication": 0.1,
+      "intake_catch_rate": 0.9017,
+      "truth_breach_rate": 0.0983,
+      "floor_violations": 0
+    },
+    {
+      "sophistication": 0.2,
+      "intake_catch_rate": 0.8001,
+      "truth_breach_rate": 0.1999,
+      "floor_violations": 0
+    },
+    {
+      "sophistication": 0.3,
+      "intake_catch_rate": 0.6992,
+      "truth_breach_rate": 0.3008,
+      "floor_violations": 0
+    },
+    {
+      "sophistication": 0.4,
+      "intake_catch_rate": 0.5993,
+      "truth_breach_rate": 0.4007,
+      "floor_violations": 0
+    },
+    {
+      "sophistication": 0.5,
+      "intake_catch_rate": 0.5002,
+      "truth_breach_rate": 0.4998,
+      "floor_violations": 0
+    },
+    {
+      "sophistication": 0.6,
+      "intake_catch_rate": 0.3994,
+      "truth_breach_rate": 0.6006,
+      "floor_violations": 0
+    },
+    {
+      "sophistication": 0.7,
+      "intake_catch_rate": 0.2997,
+      "truth_breach_rate": 0.7003,
+      "floor_violations": 0
+    },
+    {
+      "sophistication": 0.8,
+      "intake_catch_rate": 0.2009,
+      "truth_breach_rate": 0.7991,
+      "floor_violations": 0
+    },
+    {
+      "sophistication": 0.9,
+      "intake_catch_rate": 0.0988,
+      "truth_breach_rate": 0.9012,
+      "floor_violations": 0
+    },
+    {
+      "sophistication": 1.0,
+      "intake_catch_rate": 0.0,
+      "truth_breach_rate": 1.0,
+      "floor_violations": 0
+    }
+  ],
+  "launder": [
+    {
+      "audit_rate": 0.02,
+      "median_detection_latency_rounds": 547
+    },
+    {
+      "audit_rate": 0.05,
+      "median_detection_latency_rounds": 402
+    },
+    {
+      "audit_rate": 0.1,
+      "median_detection_latency_rounds": 179
+    },
+    {
+      "audit_rate": 0.2,
+      "median_detection_latency_rounds": 89
+    },
+    {
+      "audit_rate": 0.4,
+      "median_detection_latency_rounds": 46
+    }
+  ],
+  "downgrade_rejection_rate": 1.0,
+  "soundness": {
+    "claimed_space_floor_violations_total": 0,
+    "note": "the gate's floor invariant Emit(S) => cls(B) >= phi_O held across every event; truth-space breaches arise only when forged provenance defeats intake."
+  }
+}

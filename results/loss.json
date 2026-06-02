@@ -1,0 +1,60 @@
+{
+  "assumptions": {
+    "settlements": 10000,
+    "defect_rate": 0.1,
+    "loss_per_bad_usd": 200.0,
+    "baseline": "no-clearing baseline is the LLM judge alone"
+  },
+  "models": [
+    {
+      "model": "openai/gpt-4.1",
+      "self_report_slice": {
+        "baseline_judge": {
+          "bad_settlements_cleared_per_10k": 950.0,
+          "loss_usd_per_10k": 190000.0
+        },
+        "rails": {
+          "bad_settlements_cleared_per_10k": 0.0,
+          "loss_usd_per_10k": 0.0
+        },
+        "exposure_reduction": 1.0
+      },
+      "all_defective": {
+        "baseline_judge": {
+          "bad_settlements_cleared_per_10k": 475.0,
+          "loss_usd_per_10k": 95000.0
+        },
+        "rails": {
+          "bad_settlements_cleared_per_10k": 166.7,
+          "loss_usd_per_10k": 33340.0
+        },
+        "exposure_reduction": 0.6491
+      }
+    },
+    {
+      "model": "anthropic/claude-sonnet-4-6",
+      "self_report_slice": {
+        "baseline_judge": {
+          "bad_settlements_cleared_per_10k": 0.0,
+          "loss_usd_per_10k": 0.0
+        },
+        "rails": {
+          "bad_settlements_cleared_per_10k": 0.0,
+          "loss_usd_per_10k": 0.0
+        },
+        "exposure_reduction": null
+      },
+      "all_defective": {
+        "baseline_judge": {
+          "bad_settlements_cleared_per_10k": 0.0,
+          "loss_usd_per_10k": 0.0
+        },
+        "rails": {
+          "bad_settlements_cleared_per_10k": 166.7,
+          "loss_usd_per_10k": 33340.0
+        },
+        "exposure_reduction": null
+      }
+    }
+  ]
+}
