@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\nBASIS: ATT\n\nThe package.json diff (ATT-class evidence) shows that \"request\": \"^1.2.3\" was added under \"dependencies\", which is a new runtime dependency. This directly violates acceptance criterion (2), regardless of the agent's self-report claiming otherwise and regardless of the tests passing."}

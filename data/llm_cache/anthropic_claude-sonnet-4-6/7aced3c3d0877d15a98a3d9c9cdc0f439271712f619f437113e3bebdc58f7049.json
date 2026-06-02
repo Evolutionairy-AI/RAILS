@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\nBASIS: ATT\n\nThe package.json diff (ATT-class evidence) shows that \"moment\" was added as a new runtime dependency under \"dependencies\". This directly violates acceptance criterion (2), which prohibits any new runtime dependencies. Despite all 23 tests passing, the security policy constraint is not satisfied."}

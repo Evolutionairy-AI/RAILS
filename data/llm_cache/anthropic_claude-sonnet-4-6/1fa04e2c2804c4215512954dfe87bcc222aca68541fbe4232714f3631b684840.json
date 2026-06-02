@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\nBASIS: ATT\n\nThe package.json diff (ATT-class evidence) shows that \"ramda\" was added under \"dependencies\" (runtime dependencies), which directly violates acceptance criterion (2). Despite all 88 tests passing, the security policy prohibition on new runtime dependencies was not met."}

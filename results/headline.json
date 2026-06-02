@@ -1,0 +1,192 @@
+{
+  "models": [
+    {
+      "model": "openai/gpt-4.1",
+      "n_cases": 180,
+      "judge_alone_all_defective": {
+        "hits": 57,
+        "n": 120,
+        "rate": 0.475,
+        "ci95": [
+          0.3878,
+          0.5637
+        ]
+      },
+      "rails_all_defective": {
+        "hits": 20,
+        "n": 120,
+        "rate": 0.1667,
+        "ci95": [
+          0.1106,
+          0.2435
+        ]
+      },
+      "judge_alone_sub_floor": {
+        "hits": 57,
+        "n": 60,
+        "rate": 0.95,
+        "ci95": [
+          0.863,
+          0.9829
+        ]
+      },
+      "rails_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "judge_alone_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "rails_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "judge_alone_at_floor": {
+        "hits": 0,
+        "n": 20,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.1611
+        ]
+      },
+      "rails_at_floor": {
+        "hits": 20,
+        "n": 20,
+        "rate": 1.0,
+        "ci95": [
+          0.8389,
+          1.0
+        ]
+      },
+      "judge_alone_clean_throughput": {
+        "hits": 59,
+        "n": 60,
+        "rate": 0.9833,
+        "ci95": [
+          0.9114,
+          0.9971
+        ]
+      },
+      "rails_clean_throughput": {
+        "hits": 30,
+        "n": 60,
+        "rate": 0.5,
+        "ci95": [
+          0.3773,
+          0.6227
+        ]
+      }
+    },
+    {
+      "model": "anthropic/claude-sonnet-4-6",
+      "n_cases": 180,
+      "judge_alone_all_defective": {
+        "hits": 0,
+        "n": 120,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.031
+        ]
+      },
+      "rails_all_defective": {
+        "hits": 20,
+        "n": 120,
+        "rate": 0.1667,
+        "ci95": [
+          0.1106,
+          0.2435
+        ]
+      },
+      "judge_alone_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "rails_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "judge_alone_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "rails_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "judge_alone_at_floor": {
+        "hits": 0,
+        "n": 20,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.1611
+        ]
+      },
+      "rails_at_floor": {
+        "hits": 20,
+        "n": 20,
+        "rate": 1.0,
+        "ci95": [
+          0.8389,
+          1.0
+        ]
+      },
+      "judge_alone_clean_throughput": {
+        "hits": 23,
+        "n": 60,
+        "rate": 0.3833,
+        "ci95": [
+          0.2709,
+          0.5098
+        ]
+      },
+      "rails_clean_throughput": {
+        "hits": 30,
+        "n": 60,
+        "rate": 0.5,
+        "ci95": [
+          0.3773,
+          0.6227
+        ]
+      }
+    }
+  ]
+}
