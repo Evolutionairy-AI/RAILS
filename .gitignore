@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+# credentials — never commit
+API_KEYS/
+*.key
+*key*.txt
+.env
+# large run artifacts (the small committed cache lives under data/llm_cache, NOT here)
+results/cache_large/
+*.npz
