@@ -31,6 +31,13 @@ def main() -> None:
     add(f"# RAILS headline dataset — the {len(cases)} sub_floor defective cases (for Adrian, A4)\n")
     add("_Generated from `reference/data/curated_cases/` (seed 20260602). "
         "This is the exact set the headline false-clear rate is computed on._\n")
+    add("**Why this matters now (4-provider result).** On this exact set, judge-alone false-clear "
+        "ranges from 0% to 96.7% across nine models. Six refuse almost everything (Anthropic "
+        "Opus 4.8 / Sonnet 4.6 / Haiku 4.5; OpenAI GPT-5.5 / GPT-5.4-mini; Google Gemini 2.5 Pro); "
+        "three rubber-stamp them (Mistral Large 76.7%; prior-gen GPT-4.1 95.0%; Google Gemini 2.5 "
+        "Flash 96.7%). RAILS clears 0% for every model. So these cases are **not** a strawman that "
+        "no current model fails — three current/prior-gen models genuinely clear them, which is "
+        "exactly why a read of their realism is worth your time.\n")
 
     add("## 1. What one of these cases is, and why it is the right test\n")
     add("A *sub_floor defective* case is a confident, detailed agent **self-report claiming success**, "
@@ -57,6 +64,11 @@ def main() -> None:
         "a handful of real anonymized cases before anything ships. Your call to make on reading them: **is a "
         "confident self-report with no independent evidence a realistic input a deployed judge would face and "
         "clear, and are these defects real defects?**\n")
+    add("This realism is now **load-bearing** for the three permissive models' numbers: if a skeptic discounts "
+        "the templates, they discount Mistral's 76.7%, GPT-4.1's 95.0%, and Gemini Flash's 96.7%. It does **not** "
+        "touch the governance argument — that rests on the *dispersion* across models (including the within-Google "
+        "5%-vs-97% split between 2.5 Pro and 2.5 Flash), which holds regardless of how realistic any single case "
+        "is — but it does touch the punchy current-model 97%-vs-0% figure. Hence the read.\n")
 
     add("## 3. The template space (combinatorial variety behind the 60)\n")
     add("Each case draws one domain/bug, one root-cause/fix, and a test count, then asserts success. The pools:\n")
