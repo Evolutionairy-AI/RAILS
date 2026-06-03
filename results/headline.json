@@ -1,15 +1,15 @@
 {
   "models": [
     {
-      "model": "openai/gpt-4.1",
+      "model": "anthropic/claude-opus-4-8",
       "n_cases": 180,
       "judge_alone_all_defective": {
-        "hits": 57,
+        "hits": 0,
         "n": 120,
-        "rate": 0.475,
+        "rate": 0.0,
         "ci95": [
-          0.3878,
-          0.5637
+          0.0,
+          0.031
         ]
       },
       "rails_all_defective": {
@@ -22,12 +22,12 @@
         ]
       },
       "judge_alone_sub_floor": {
-        "hits": 57,
+        "hits": 0,
         "n": 60,
-        "rate": 0.95,
+        "rate": 0.0,
         "ci95": [
-          0.863,
-          0.9829
+          0.0,
+          0.0602
         ]
       },
       "rails_sub_floor": {
@@ -76,21 +76,21 @@
         ]
       },
       "judge_alone_clean_throughput": {
-        "hits": 59,
+        "hits": 0,
         "n": 60,
-        "rate": 0.9833,
+        "rate": 0.0,
         "ci95": [
-          0.9114,
-          0.9971
+          0.0,
+          0.0602
         ]
       },
       "rails_clean_throughput": {
-        "hits": 30,
+        "hits": 3,
         "n": 60,
-        "rate": 0.5,
+        "rate": 0.05,
         "ci95": [
-          0.3773,
-          0.6227
+          0.0171,
+          0.137
         ]
       }
     },
@@ -176,6 +176,382 @@
         "ci95": [
           0.2709,
           0.5098
+        ]
+      },
+      "rails_clean_throughput": {
+        "hits": 30,
+        "n": 60,
+        "rate": 0.5,
+        "ci95": [
+          0.3773,
+          0.6227
+        ]
+      }
+    },
+    {
+      "model": "anthropic/claude-haiku-4-5-20251001",
+      "n_cases": 180,
+      "judge_alone_all_defective": {
+        "hits": 0,
+        "n": 120,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.031
+        ]
+      },
+      "rails_all_defective": {
+        "hits": 10,
+        "n": 120,
+        "rate": 0.0833,
+        "ci95": [
+          0.0459,
+          0.1466
+        ]
+      },
+      "judge_alone_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "rails_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "judge_alone_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "rails_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "judge_alone_at_floor": {
+        "hits": 0,
+        "n": 20,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.1611
+        ]
+      },
+      "rails_at_floor": {
+        "hits": 10,
+        "n": 20,
+        "rate": 0.5,
+        "ci95": [
+          0.2993,
+          0.7007
+        ]
+      },
+      "judge_alone_clean_throughput": {
+        "hits": 30,
+        "n": 60,
+        "rate": 0.5,
+        "ci95": [
+          0.3773,
+          0.6227
+        ]
+      },
+      "rails_clean_throughput": {
+        "hits": 30,
+        "n": 60,
+        "rate": 0.5,
+        "ci95": [
+          0.3773,
+          0.6227
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-5.5",
+      "n_cases": 180,
+      "judge_alone_all_defective": {
+        "hits": 0,
+        "n": 120,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.031
+        ]
+      },
+      "rails_all_defective": {
+        "hits": 20,
+        "n": 120,
+        "rate": 0.1667,
+        "ci95": [
+          0.1106,
+          0.2435
+        ]
+      },
+      "judge_alone_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "rails_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "judge_alone_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "rails_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "judge_alone_at_floor": {
+        "hits": 0,
+        "n": 20,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.1611
+        ]
+      },
+      "rails_at_floor": {
+        "hits": 20,
+        "n": 20,
+        "rate": 1.0,
+        "ci95": [
+          0.8389,
+          1.0
+        ]
+      },
+      "judge_alone_clean_throughput": {
+        "hits": 30,
+        "n": 60,
+        "rate": 0.5,
+        "ci95": [
+          0.3773,
+          0.6227
+        ]
+      },
+      "rails_clean_throughput": {
+        "hits": 29,
+        "n": 60,
+        "rate": 0.4833,
+        "ci95": [
+          0.3617,
+          0.6069
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "n_cases": 180,
+      "judge_alone_all_defective": {
+        "hits": 0,
+        "n": 120,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.031
+        ]
+      },
+      "rails_all_defective": {
+        "hits": 20,
+        "n": 120,
+        "rate": 0.1667,
+        "ci95": [
+          0.1106,
+          0.2435
+        ]
+      },
+      "judge_alone_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "rails_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "judge_alone_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "rails_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "judge_alone_at_floor": {
+        "hits": 0,
+        "n": 20,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.1611
+        ]
+      },
+      "rails_at_floor": {
+        "hits": 20,
+        "n": 20,
+        "rate": 1.0,
+        "ci95": [
+          0.8389,
+          1.0
+        ]
+      },
+      "judge_alone_clean_throughput": {
+        "hits": 30,
+        "n": 60,
+        "rate": 0.5,
+        "ci95": [
+          0.3773,
+          0.6227
+        ]
+      },
+      "rails_clean_throughput": {
+        "hits": 18,
+        "n": 60,
+        "rate": 0.3,
+        "ci95": [
+          0.199,
+          0.4251
+        ]
+      }
+    },
+    {
+      "model": "openai/gpt-4.1",
+      "n_cases": 180,
+      "judge_alone_all_defective": {
+        "hits": 57,
+        "n": 120,
+        "rate": 0.475,
+        "ci95": [
+          0.3878,
+          0.5637
+        ]
+      },
+      "rails_all_defective": {
+        "hits": 20,
+        "n": 120,
+        "rate": 0.1667,
+        "ci95": [
+          0.1106,
+          0.2435
+        ]
+      },
+      "judge_alone_sub_floor": {
+        "hits": 57,
+        "n": 60,
+        "rate": 0.95,
+        "ci95": [
+          0.863,
+          0.9829
+        ]
+      },
+      "rails_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "judge_alone_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "rails_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "judge_alone_at_floor": {
+        "hits": 0,
+        "n": 20,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.1611
+        ]
+      },
+      "rails_at_floor": {
+        "hits": 20,
+        "n": 20,
+        "rate": 1.0,
+        "ci95": [
+          0.8389,
+          1.0
+        ]
+      },
+      "judge_alone_clean_throughput": {
+        "hits": 59,
+        "n": 60,
+        "rate": 0.9833,
+        "ci95": [
+          0.9114,
+          0.9971
         ]
       },
       "rails_clean_throughput": {

@@ -1,60 +1,156 @@
 {
   "assumptions": {
     "settlements": 10000,
-    "defect_rate": 0.1,
     "loss_per_bad_usd": 200.0,
-    "baseline": "no-clearing baseline is the LLM judge alone"
+    "defect_rates_swept": [
+      0.005,
+      0.01,
+      0.02,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "sources": {
+      "loss_per_bad_usd": {
+        "value": 200.0,
+        "anchor": "avg chargeback value ~$110 US / ~$120 travel (Chargeflow; firm up before publication)",
+        "note": "$200 point value is slightly conservative vs the chargeback-value anchor"
+      },
+      "card_fraud_loss_rate": "6.43 cents per $100 of volume (2024); $33.4B global card fraud losses (Nilson Report, Jan 2026)",
+      "issuer_dispute_processing_cost_usd": "$9.08-$10.32 per dispute (Mastercard, 'the true cost of a chargeback', 2025)",
+      "chargeback_rate_trend": "~0.17% rising to ~0.26% across 2025; merchant cost multiplier $4.61 lost per $1 of chargebacks; first-party fraud ~45% of dispute volume (Sift Q4 2025 Digital Trust Index)",
+      "dispute_rate_band": "0.4%-1% typical, >1% treated as high risk; Visa consolidated into VAMP April 2025",
+      "baseline": "no-RAILS baseline is a permissive (throughput-tuned) LLM judge"
+    }
   },
-  "models": [
+  "baseline_judge": {
+    "model": "openai/gpt-4.1",
+    "sub_floor_false_clear_rate": 0.95,
+    "exposure_curve_usd_per_10k": {
+      "0.005": 9500.0,
+      "0.010": 19000.0,
+      "0.020": 38000.0,
+      "0.050": 95000.0,
+      "0.100": 190000.0,
+      "0.200": 380000.0
+    }
+  },
+  "rails": {
+    "sub_floor_false_clear_rate": 0.0,
+    "exposure_curve_usd_per_10k": {
+      "0.005": 0.0,
+      "0.010": 0.0,
+      "0.020": 0.0,
+      "0.050": 0.0,
+      "0.100": 0.0,
+      "0.200": 0.0
+    }
+  },
+  "approval_impact_declines_per_10k": [
+    {
+      "model": "anthropic/claude-opus-4-8",
+      "judge_alone_decline_rate": 1.0,
+      "rails_fixed_att_decline_rate": 0.95
+    },
+    {
+      "model": "anthropic/claude-sonnet-4-6",
+      "judge_alone_decline_rate": 0.6167,
+      "rails_fixed_att_decline_rate": 0.5
+    },
+    {
+      "model": "anthropic/claude-haiku-4-5-20251001",
+      "judge_alone_decline_rate": 0.5,
+      "rails_fixed_att_decline_rate": 0.5
+    },
+    {
+      "model": "openai/gpt-5.5",
+      "judge_alone_decline_rate": 0.5,
+      "rails_fixed_att_decline_rate": 0.5167
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "judge_alone_decline_rate": 0.5,
+      "rails_fixed_att_decline_rate": 0.7
+    },
     {
       "model": "openai/gpt-4.1",
-      "self_report_slice": {
-        "baseline_judge": {
-          "bad_settlements_cleared_per_10k": 950.0,
-          "loss_usd_per_10k": 190000.0
-        },
-        "rails": {
-          "bad_settlements_cleared_per_10k": 0.0,
-          "loss_usd_per_10k": 0.0
-        },
-        "exposure_reduction": 1.0
-      },
-      "all_defective": {
-        "baseline_judge": {
-          "bad_settlements_cleared_per_10k": 475.0,
-          "loss_usd_per_10k": 95000.0
-        },
-        "rails": {
-          "bad_settlements_cleared_per_10k": 166.7,
-          "loss_usd_per_10k": 33340.0
-        },
-        "exposure_reduction": 0.6491
+      "judge_alone_decline_rate": 0.0167,
+      "rails_fixed_att_decline_rate": 0.5
+    }
+  ],
+  "per_model_exposure_at_defect_rates": [
+    {
+      "model": "anthropic/claude-opus-4-8",
+      "sub_floor_false_clear_rate": 0.0,
+      "exposure_usd_per_10k": {
+        "0.005": 0.0,
+        "0.010": 0.0,
+        "0.020": 0.0,
+        "0.050": 0.0,
+        "0.100": 0.0,
+        "0.200": 0.0
       }
     },
     {
       "model": "anthropic/claude-sonnet-4-6",
-      "self_report_slice": {
-        "baseline_judge": {
-          "bad_settlements_cleared_per_10k": 0.0,
-          "loss_usd_per_10k": 0.0
-        },
-        "rails": {
-          "bad_settlements_cleared_per_10k": 0.0,
-          "loss_usd_per_10k": 0.0
-        },
-        "exposure_reduction": null
-      },
-      "all_defective": {
-        "baseline_judge": {
-          "bad_settlements_cleared_per_10k": 0.0,
-          "loss_usd_per_10k": 0.0
-        },
-        "rails": {
-          "bad_settlements_cleared_per_10k": 166.7,
-          "loss_usd_per_10k": 33340.0
-        },
-        "exposure_reduction": null
+      "sub_floor_false_clear_rate": 0.0,
+      "exposure_usd_per_10k": {
+        "0.005": 0.0,
+        "0.010": 0.0,
+        "0.020": 0.0,
+        "0.050": 0.0,
+        "0.100": 0.0,
+        "0.200": 0.0
+      }
+    },
+    {
+      "model": "anthropic/claude-haiku-4-5-20251001",
+      "sub_floor_false_clear_rate": 0.0,
+      "exposure_usd_per_10k": {
+        "0.005": 0.0,
+        "0.010": 0.0,
+        "0.020": 0.0,
+        "0.050": 0.0,
+        "0.100": 0.0,
+        "0.200": 0.0
+      }
+    },
+    {
+      "model": "openai/gpt-5.5",
+      "sub_floor_false_clear_rate": 0.0,
+      "exposure_usd_per_10k": {
+        "0.005": 0.0,
+        "0.010": 0.0,
+        "0.020": 0.0,
+        "0.050": 0.0,
+        "0.100": 0.0,
+        "0.200": 0.0
+      }
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "sub_floor_false_clear_rate": 0.0,
+      "exposure_usd_per_10k": {
+        "0.005": 0.0,
+        "0.010": 0.0,
+        "0.020": 0.0,
+        "0.050": 0.0,
+        "0.100": 0.0,
+        "0.200": 0.0
+      }
+    },
+    {
+      "model": "openai/gpt-4.1",
+      "sub_floor_false_clear_rate": 0.95,
+      "exposure_usd_per_10k": {
+        "0.005": 9500.0,
+        "0.010": 19000.0,
+        "0.020": 38000.0,
+        "0.050": 95000.0,
+        "0.100": 190000.0,
+        "0.200": 380000.0
       }
     }
-  ]
+  ],
+  "note_on_decline_cost": "The fixed-ATT RAILS decline rate above is the conservative bound; the exposure-variable floor (results/variable_floor.json) recovers most of the legitimate self-report throughput while holding sub-floor exposure near zero where the dollars are."
 }

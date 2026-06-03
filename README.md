@@ -37,11 +37,13 @@ python -m pytest          # full suite, including the spec-conformance tests
 
 `tests/test_conformance.py` has one test per empirical claim: the floor invariant at scale, FORGE-UP catch behavior, LAUNDER-BASIS detectability, DOWNGRADE rejection, and the headline divergence.
 
-## Headline finding
+## Headline finding (governance, not accuracy)
 
-On defective settlements whose only evidence is an agent self-report (below the ATT floor), two frontier LLM judges diverge sharply when used *alone*: one cleared 95% of them, the other cleared 0% but rejected most legitimate work as well. **Under RAILS floor enforcement the clearing decision is identical across both judges** — zero defective settlements clear on inadmissible evidence — while admissibly-evidenced work clears unchanged. The LLM judge's verdict is an ungoverned, model-dependent disposition; the RAILS property is not.
+On defective settlements whose only evidence is an agent self-report (below the ATT floor), the bare LLM judge's verdict is an **ungoverned, model-dependent disposition**. Across a roster of current frontier judges spanning four providers, the false-clear rate on the *same* inadmissible-evidence cases ranges from near-zero (cautious current models that have internalised the caution) up to ~95% (a permissive, prior-generation model); throughput on legitimate work ranges just as widely, from 0% (a model that rejects everything) to ~98%. No judge occupies the safe-and-high-throughput corner; each sits on a model-dependent tradeoff frontier.
 
-The honest boundary: RAILS cannot catch a defect whose only revealing evidence sits *below* the floor (the at-floor cases), which is the soundness/coverage tradeoff. Lowering the floor trades soundness for coverage — an explicit knob.
+**Under RAILS floor enforcement, soundness on this slice is identical for every judge** — zero defective settlements clear on inadmissible evidence — because it is a proven invariant, not an incidental property of the model. Throughput is then set by policy, not temperament: the exposure-variable floor (`exp_variable_floor.py`) clears low-stakes self-report work while escalating only where the dollars are. The argument is governance: a settlement system cannot rest on "the model happened to be cautious," and RAILS does not.
+
+The honest boundary (kept visible): RAILS cannot catch a defect whose only revealing evidence sits *below* the floor (the at_floor cases), and on that slice a careful judge can catch what RAILS does not. This is the soundness/coverage tradeoff; lowering the floor trades soundness for coverage — an explicit knob.
 
 ## Notes on the specification
 

@@ -47,9 +47,12 @@ def test_variable_floor_recovers_throughput_and_bounds_exposure():
 
 def test_headline_claims_hold():
     h = json.loads((RESULTS / "headline.json").read_text())
-    # RAILS clears zero inadmissible-evidence defectives, for EVERY judge
+    # RAILS clears zero inadmissible-evidence defectives, for EVERY judge: the
+    # soundness invariant is model-independent.
     for m in h["models"]:
         assert m["rails_sub_floor"]["rate"] == 0.0, m["model"]
-    # the divergence: at least one judge clears a material fraction, at least one near zero
+    # the judge's disposition is model-dependent and ungoverned: across the roster
+    # the false-clear rate on the same inadmissible-evidence cases spans from
+    # near-zero (cautious models) to a material fraction (a permissive model).
     sub = [m["judge_alone_sub_floor"]["rate"] for m in h["models"]]
     assert max(sub) >= 0.5 and min(sub) <= 0.1
