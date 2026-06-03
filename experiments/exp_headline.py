@@ -42,12 +42,17 @@ ROOT = Path(__file__).parent.parent
 CACHE = ROOT / "data" / "llm_cache"
 RESULTS = ROOT / "results"
 
-# A5 roster: current models across four providers (Anthropic frontier-to-small,
-# OpenAI frontier+small, plus Mistral and Google), with prior-gen GPT-4.1 retained
-# as a labelled permissive reference point. Google's Pro tier is quota-locked on
-# the available key (flash only); Mistral/Gemini are heavily rate-limited, so the
-# roster keeps one cross-provider point each rather than two sizes (documented in
-# the methodology). All entries are cache-backed so repro.py is keyless.
+# A5 roster: current models across three providers (Anthropic frontier-to-small,
+# OpenAI frontier+small, plus Mistral), with prior-gen GPT-4.1 retained as a
+# labelled permissive reference point.
+#
+# Google Gemini was attempted but is not in the roster: the available key's Pro
+# tier is fully quota-locked (429), and the flash tier sustained only ~0.26
+# calls/min -- far too slow to complete the 360-call run, and it auto-skipped on
+# the retry budget. It is recorded as quota-unavailable rather than dropped
+# silently. Mistral is heavily rate-limited too, so the roster keeps one Mistral
+# point rather than two sizes (documented in the methodology). All retained
+# entries are cache-backed so repro.py is keyless.
 MODELS = [
     ("anthropic", "claude-opus-4-8"),
     ("anthropic", "claude-sonnet-4-6"),
@@ -56,7 +61,6 @@ MODELS = [
     ("openai", "gpt-5.4-mini"),
     ("openai", "gpt-4.1"),                 # prior-gen permissive reference
     ("mistral", "mistral-large-latest"),
-    ("gemini", "gemini-3.5-flash"),
 ]
 
 # Providers with tighter rate limits get fewer concurrent workers.

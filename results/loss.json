@@ -76,6 +76,11 @@
       "model": "openai/gpt-4.1",
       "judge_alone_decline_rate": 0.0167,
       "rails_fixed_att_decline_rate": 0.5
+    },
+    {
+      "model": "mistral/mistral-large-latest",
+      "judge_alone_decline_rate": 0.15,
+      "rails_fixed_att_decline_rate": 0.5
     }
   ],
   "per_model_exposure_at_defect_rates": [
@@ -149,6 +154,18 @@
         "0.050": 95000.0,
         "0.100": 190000.0,
         "0.200": 380000.0
+      }
+    },
+    {
+      "model": "mistral/mistral-large-latest",
+      "sub_floor_false_clear_rate": 0.7667,
+      "exposure_usd_per_10k": {
+        "0.005": 7667.0,
+        "0.010": 15334.0,
+        "0.020": 30668.0,
+        "0.050": 76670.0,
+        "0.100": 153340.0,
+        "0.200": 306680.0
       }
     }
   ],
