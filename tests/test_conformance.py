@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 from rails_ref.simulate import run_population, run_launder_detection
+from experiments.exp_variable_floor import run as run_variable_floor
 
 RESULTS = Path(__file__).parent.parent / "results"
 
@@ -29,6 +30,19 @@ def test_launder_colluders_eventually_detected():
 def test_downgrade_rejected():
     r = run_population(5000, {"downgrade": 1.0}, seed=3)
     assert r.downgrade_rejection_rate == 1.0
+
+
+def test_variable_floor_recovers_throughput_and_bounds_exposure():
+    r = run_variable_floor()
+    reg = r["regimes"]
+    # fixed ATT floor over-declines self-report work; exposure-variable floor recovers it
+    assert reg["fixed_att"]["throughput"] == 0.0
+    assert reg["variable"]["throughput"] > 0.3
+    # variable-floor residual exposure is a tiny fraction of the permissive judge's
+    assert (reg["variable"]["residual_defective_exposure_per_10k"]
+            < 0.01 * reg["permissive_judge"]["residual_defective_exposure_per_10k"])
+    # the gate never clears below an obligation's own floor in any regime
+    assert r["soundness"]["floor_violations_total"] == 0
 
 
 def test_headline_claims_hold():

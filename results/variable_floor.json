@@ -1,0 +1,33 @@
+{
+  "assumptions": {
+    "n": 20000,
+    "defect_rate": 0.1,
+    "default_basis": "SIGN",
+    "exposure": "log-uniform $1..$100,000",
+    "ladder": "<$10 SELF, <$100 SIGN, <$1000 ATT, >=$1000 PROOF"
+  },
+  "regimes": {
+    "fixed_att": {
+      "throughput": 0.0,
+      "decline_rate": 1.0,
+      "residual_defective_exposure_per_10k": 0.0
+    },
+    "variable": {
+      "throughput": 0.4071,
+      "decline_rate": 0.5929,
+      "residual_defective_exposure_per_10k": 8825.44
+    },
+    "permissive_judge": {
+      "throughput": 1.0,
+      "decline_rate": 0.0,
+      "residual_defective_exposure_per_10k": 8274130.0
+    }
+  },
+  "variable_floor_effort_follows_money": {
+    "transactions_cleared_pct": 40.7,
+    "dollars_requiring_att_or_higher_pct": 99.9
+  },
+  "soundness": {
+    "floor_violations_total": 0
+  }
+}
