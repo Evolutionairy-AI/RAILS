@@ -657,6 +657,194 @@
           0.6227
         ]
       }
+    },
+    {
+      "model": "gemini/gemini-2.5-pro",
+      "n_cases": 180,
+      "judge_alone_all_defective": {
+        "hits": 3,
+        "n": 120,
+        "rate": 0.025,
+        "ci95": [
+          0.0085,
+          0.0709
+        ]
+      },
+      "rails_all_defective": {
+        "hits": 20,
+        "n": 120,
+        "rate": 0.1667,
+        "ci95": [
+          0.1106,
+          0.2435
+        ]
+      },
+      "judge_alone_sub_floor": {
+        "hits": 3,
+        "n": 60,
+        "rate": 0.05,
+        "ci95": [
+          0.0171,
+          0.137
+        ]
+      },
+      "rails_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "judge_alone_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "rails_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "judge_alone_at_floor": {
+        "hits": 0,
+        "n": 20,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.1611
+        ]
+      },
+      "rails_at_floor": {
+        "hits": 20,
+        "n": 20,
+        "rate": 1.0,
+        "ci95": [
+          0.8389,
+          1.0
+        ]
+      },
+      "judge_alone_clean_throughput": {
+        "hits": 16,
+        "n": 60,
+        "rate": 0.2667,
+        "ci95": [
+          0.1713,
+          0.3901
+        ]
+      },
+      "rails_clean_throughput": {
+        "hits": 29,
+        "n": 60,
+        "rate": 0.4833,
+        "ci95": [
+          0.3617,
+          0.6069
+        ]
+      }
+    },
+    {
+      "model": "gemini/gemini-2.5-flash",
+      "n_cases": 180,
+      "judge_alone_all_defective": {
+        "hits": 58,
+        "n": 120,
+        "rate": 0.4833,
+        "ci95": [
+          0.3958,
+          0.5719
+        ]
+      },
+      "rails_all_defective": {
+        "hits": 20,
+        "n": 120,
+        "rate": 0.1667,
+        "ci95": [
+          0.1106,
+          0.2435
+        ]
+      },
+      "judge_alone_sub_floor": {
+        "hits": 58,
+        "n": 60,
+        "rate": 0.9667,
+        "ci95": [
+          0.8864,
+          0.9908
+        ]
+      },
+      "rails_sub_floor": {
+        "hits": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0602
+        ]
+      },
+      "judge_alone_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "rails_admissible": {
+        "hits": 0,
+        "n": 40,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0876
+        ]
+      },
+      "judge_alone_at_floor": {
+        "hits": 0,
+        "n": 20,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.1611
+        ]
+      },
+      "rails_at_floor": {
+        "hits": 20,
+        "n": 20,
+        "rate": 1.0,
+        "ci95": [
+          0.8389,
+          1.0
+        ]
+      },
+      "judge_alone_clean_throughput": {
+        "hits": 54,
+        "n": 60,
+        "rate": 0.9,
+        "ci95": [
+          0.7985,
+          0.9534
+        ]
+      },
+      "rails_clean_throughput": {
+        "hits": 30,
+        "n": 60,
+        "rate": 0.5,
+        "ci95": [
+          0.3773,
+          0.6227
+        ]
+      }
     }
   ]
 }

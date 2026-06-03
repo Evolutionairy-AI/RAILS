@@ -42,17 +42,17 @@ ROOT = Path(__file__).parent.parent
 CACHE = ROOT / "data" / "llm_cache"
 RESULTS = ROOT / "results"
 
-# A5 roster: current models across three providers (Anthropic frontier-to-small,
-# OpenAI frontier+small, plus Mistral), with prior-gen GPT-4.1 retained as a
-# labelled permissive reference point.
+# A5 roster: current models across four providers (Anthropic frontier-to-small,
+# OpenAI frontier+small, Mistral, and Google frontier+small), with prior-gen
+# GPT-4.1 retained as a labelled permissive reference point.
 #
-# Google Gemini was attempted but is not in the roster: the available key's Pro
-# tier is fully quota-locked (429), and the flash tier sustained only ~0.26
-# calls/min -- far too slow to complete the 360-call run, and it auto-skipped on
-# the retry budget. It is recorded as quota-unavailable rather than dropped
-# silently. Mistral is heavily rate-limited too, so the roster keeps one Mistral
-# point rather than two sizes (documented in the methodology). All retained
-# entries are cache-backed so repro.py is keyless.
+# Google runs on a paid key, as a GA size-pair: gemini-2.5-pro (frontier Pro)
+# and gemini-2.5-flash (stable small). The newest preview models were 503
+# capacity-limited under sustained load at run time -- gemini-3.5-flash and
+# gemini-3.1-pro-preview both returned "high demand" 503s under concurrency, and
+# gemini-3-pro-preview is retired (404) -- so the roster uses the well-provisioned
+# GA 2.5 models. Mistral is rate-limited, so the roster keeps one Mistral point.
+# All entries are cache-backed so repro.py is keyless.
 MODELS = [
     ("anthropic", "claude-opus-4-8"),
     ("anthropic", "claude-sonnet-4-6"),
@@ -61,10 +61,13 @@ MODELS = [
     ("openai", "gpt-5.4-mini"),
     ("openai", "gpt-4.1"),                 # prior-gen permissive reference
     ("mistral", "mistral-large-latest"),
+    ("gemini", "gemini-2.5-pro"),          # GA frontier Pro (3.1-pro-preview was 503-flaky under load)
+    ("gemini", "gemini-2.5-flash"),        # stable small
 ]
 
-# Providers with tighter rate limits get fewer concurrent workers.
-WORKERS = {"anthropic": 8, "openai": 8, "mistral": 6, "gemini": 3}
+# Providers with tighter rate limits get fewer concurrent workers. Gemini is on a
+# paid key now, so it can take real concurrency.
+WORKERS = {"anthropic": 8, "openai": 8, "mistral": 6, "gemini": 8}
 
 PANEL = [
     PolicyVerifier(watch_kind="pkg_delta", verifier_id="pv_pkg"),
