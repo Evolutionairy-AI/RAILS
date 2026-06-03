@@ -42,23 +42,25 @@ ROOT = Path(__file__).parent.parent
 CACHE = ROOT / "data" / "llm_cache"
 RESULTS = ROOT / "results"
 
-# A5 roster: current models spanning four providers and a frontier-to-small size
-# range. Google's Pro tier is quota-locked on the available key, so Google is
-# represented by two flash generations (documented in the methodology).
+# A5 roster: current models across four providers (Anthropic frontier-to-small,
+# OpenAI frontier+small, plus Mistral and Google), with prior-gen GPT-4.1 retained
+# as a labelled permissive reference point. Google's Pro tier is quota-locked on
+# the available key (flash only); Mistral/Gemini are heavily rate-limited, so the
+# roster keeps one cross-provider point each rather than two sizes (documented in
+# the methodology). All entries are cache-backed so repro.py is keyless.
 MODELS = [
     ("anthropic", "claude-opus-4-8"),
     ("anthropic", "claude-sonnet-4-6"),
     ("anthropic", "claude-haiku-4-5-20251001"),
     ("openai", "gpt-5.5"),
     ("openai", "gpt-5.4-mini"),
+    ("openai", "gpt-4.1"),                 # prior-gen permissive reference
     ("mistral", "mistral-large-latest"),
-    ("mistral", "mistral-small-latest"),
     ("gemini", "gemini-3.5-flash"),
-    ("gemini", "gemini-2.5-flash"),
 ]
 
 # Providers with tighter rate limits get fewer concurrent workers.
-WORKERS = {"anthropic": 8, "openai": 8, "mistral": 3, "gemini": 2}
+WORKERS = {"anthropic": 8, "openai": 8, "mistral": 6, "gemini": 3}
 
 PANEL = [
     PolicyVerifier(watch_kind="pkg_delta", verifier_id="pv_pkg"),
@@ -165,7 +167,11 @@ def main(argv: list[str]) -> None:
     for prov, mod in models:
         workers = WORKERS.get(prov, 8)
         print(f"running {prov}/{mod} over {len(cases)} cases ({workers} workers) ...", flush=True)
-        r = run_model(prov, mod, cases, workers=workers)
+        try:
+            r = run_model(prov, mod, cases, workers=workers)
+        except Exception as e:  # one model failing must not kill the rest of the roster
+            print(f"  SKIPPED {prov}/{mod}: {type(e).__name__}: {str(e)[:160]}", flush=True)
+            continue
         existing["models"] = [m for m in existing["models"] if m["model"] != r["model"]] + [r]
         out_path.write_text(json.dumps(existing, indent=2), encoding="utf-8")
         ja, ra = r["judge_alone_sub_floor"], r["rails_sub_floor"]
