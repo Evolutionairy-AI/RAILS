@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe package.json diff shows `ramda` was added under `\"dependencies\"` (a runtime dependency), which violates acceptance criterion (2) prohibiting new runtime dependencies. The self-report's claim of \"no new runtime dependencies\" directly contradicts the evidence."}

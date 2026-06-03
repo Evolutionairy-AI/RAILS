@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\nBASIS: ATT\n\nThe CI log (ATT - attested/automated test results) shows 62 passed and 2 FAILED tests, which directly contradicts acceptance criterion (2) requiring ALL tests to pass. The self-report claiming all 64 tests pass is contradicted by the objective automated evidence and cannot override it."}

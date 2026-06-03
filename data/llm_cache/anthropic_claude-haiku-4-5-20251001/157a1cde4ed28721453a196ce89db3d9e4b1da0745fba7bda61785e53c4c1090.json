@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\n\nBASIS: ATT\n\nThe CI log (ATT - attested/automated test result) shows 5 failed tests in the regression suite, directly contradicting the acceptance criterion that \"ALL tests must pass.\" The self-report claim is contradicted by the objective automated evidence and therefore cannot override it."}

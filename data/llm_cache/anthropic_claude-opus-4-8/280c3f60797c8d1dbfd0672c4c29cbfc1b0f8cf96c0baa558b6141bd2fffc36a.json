@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\nBASIS: ATT\n\nThe package.json diff (ATT-class evidence) shows a new runtime dependency (`node-fetch`) added under \"dependencies\", violating acceptance criterion (2), regardless of the passing tests. The self-report's claim of \"no new runtime dependencies\" is contradicted by attestable evidence."}

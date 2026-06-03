@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe acceptance criteria require all three features, but the third-party reviewer found no structured audit logging (C). The passing tests do not override the missing deliverable\u2014they likely just don't cover (C). Since all three were required and one is absent, the work does not satisfy the criteria."}

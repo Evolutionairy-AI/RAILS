@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe self-report describes fixing a float-precision summation bug (integer cents, totals) \u2014 which is unrelated to a token-refresh race condition in an auth service. The described fix doesn't match the task, and no verifiable artifact (CI log, diff) is provided to confirm any of the claims."}

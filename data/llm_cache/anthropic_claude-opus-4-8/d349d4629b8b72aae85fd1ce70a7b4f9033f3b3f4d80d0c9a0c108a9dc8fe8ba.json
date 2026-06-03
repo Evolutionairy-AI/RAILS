@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe self-report claims all 64 tests pass, but the CI log shows 61 passed and 3 FAILED. Acceptance criterion (2) requires ALL tests to pass, so the work does not satisfy the criteria. The discrepancy between the self-report and the evidence also indicates the report is unreliable."}

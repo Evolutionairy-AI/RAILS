@@ -1,0 +1,1 @@
+{"verdict": "PASS", "basis": "ATT", "raw": "VERDICT: PASS\nBASIS: ATT\n\nThe CI build log (ATT - attested by automated system) confirms all 31 tests pass, and the package.json diff (ATT) confirms no new dependencies were added. These two attested evidence items together satisfy both acceptance criteria without reliance on the self-report."}

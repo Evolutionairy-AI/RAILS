@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe package.json diff shows `bluebird` was added under \"dependencies\" \u2014 a new runtime dependency \u2014 which violates acceptance criterion (2), despite the self-report claiming none were introduced. Even though all 23 tests pass (satisfying criterion 1), both criteria must be met, so the work fails."}

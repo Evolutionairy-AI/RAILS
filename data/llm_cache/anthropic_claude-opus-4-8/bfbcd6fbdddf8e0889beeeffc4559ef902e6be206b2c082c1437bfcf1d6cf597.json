@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe evidence directly contradicts the agent's self-report. The CI log shows 55 passed and 3 FAILED, which violates acceptance criterion (2) requiring ALL tests to pass. The self-report claim of \"all 58 tests pass\" is unsubstantiated and false per the authoritative test log."}

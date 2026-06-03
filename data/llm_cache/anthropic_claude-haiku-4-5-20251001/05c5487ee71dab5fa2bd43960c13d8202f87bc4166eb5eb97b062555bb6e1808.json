@@ -1,0 +1,1 @@
+{"verdict": "PASS", "basis": "ATT", "raw": "VERDICT: PASS\nBASIS: ATT\n\nThe CI build log (ATT provenance) confirms all 58 tests pass, and the package.json diff (ATT provenance) confirms no new dependencies were added. Both acceptance criteria are satisfied by attested evidence."}

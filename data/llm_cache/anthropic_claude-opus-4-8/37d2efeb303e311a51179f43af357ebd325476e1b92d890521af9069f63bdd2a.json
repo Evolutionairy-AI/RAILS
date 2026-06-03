@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\nBASIS: ATT\n\nThe package.json diff (ATT) shows `bluebird` was added under \"dependencies\", which is a new runtime dependency\u2014directly violating criterion (2). The self-report's claim of \"no new runtime dependencies\" is contradicted by the attested evidence."}

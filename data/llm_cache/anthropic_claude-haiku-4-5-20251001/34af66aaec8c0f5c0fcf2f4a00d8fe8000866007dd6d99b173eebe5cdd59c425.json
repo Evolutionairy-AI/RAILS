@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe agent's self-report claims \"all 72 tests pass,\" but the CI evidence shows 69 passed with 3 FAILED tests. This directly contradicts acceptance criterion (2) requiring ALL tests to pass before delivery."}

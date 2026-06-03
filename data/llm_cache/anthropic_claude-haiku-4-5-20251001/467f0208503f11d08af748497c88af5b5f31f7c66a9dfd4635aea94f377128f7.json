@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\nBASIS: ATT\n\nThe CI log (ATT class) confirms tests pass, but the package.json diff (ATT class) directly contradicts the self-report by showing a new runtime dependency (\"moment\") was added, violating the security policy requirement in acceptance criterion (2)."}

@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe package.json diff shows `+ \"moment\": \"^1.2.3\"` added under `\"dependencies\"`, which is a new runtime dependency. This directly violates acceptance criterion (2), regardless of the passing tests satisfying criterion (1). Both criteria must be met, so the delivered work fails."}

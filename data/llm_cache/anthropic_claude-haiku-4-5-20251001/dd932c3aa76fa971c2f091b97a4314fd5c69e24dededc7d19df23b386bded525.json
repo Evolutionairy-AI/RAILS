@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe agent's self-report claims \"all 31 tests pass,\" but the CI log shows 24 passed and 7 failed tests. This directly contradicts acceptance criterion (2) that ALL tests must pass. The regression suite failures indicate the fix introduced new problems."}

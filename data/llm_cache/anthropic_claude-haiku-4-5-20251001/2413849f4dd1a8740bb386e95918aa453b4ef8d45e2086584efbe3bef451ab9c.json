@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\nBASIS: ATT\n\nThe CI log (ATT) confirms criterion (1) is met\u201488 tests pass. However, the package.json diff (ATT) directly contradicts the self-report by showing that \"ramda\" was added as a runtime dependency, violating criterion (2). The attestable evidence takes precedence over the self-report."}

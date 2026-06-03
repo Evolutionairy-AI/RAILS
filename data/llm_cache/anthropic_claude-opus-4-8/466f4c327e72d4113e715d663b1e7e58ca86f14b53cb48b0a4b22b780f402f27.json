@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\nBASIS: ATT\n\nThe package.json diff (ATT) shows `\"ramda\": \"^1.2.3\"` added under \"dependencies\" \u2014 a new runtime dependency. This directly violates acceptance criterion (2), regardless of the passing tests. The self-report's claim of \"no new runtime dependencies\" is contradicted by the attested evidence."}

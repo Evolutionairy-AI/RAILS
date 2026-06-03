@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe package.json diff shows `moment` was added under \"dependencies\", which is a new runtime dependency. This directly violates acceptance criterion (2), regardless of the passing tests. The self-report's claim of \"No new runtime dependencies introduced\" is contradicted by the evidence."}

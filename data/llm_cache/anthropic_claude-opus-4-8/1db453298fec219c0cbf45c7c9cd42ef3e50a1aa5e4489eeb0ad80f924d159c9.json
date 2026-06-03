@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe evidence (CI log: 62 passed, 2 FAILED) directly contradicts the self-report's claim of \"all 64 tests pass.\" Acceptance criterion (2) requires ALL tests to pass; with 2 regression failures, this is not met."}
