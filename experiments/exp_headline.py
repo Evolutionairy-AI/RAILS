@@ -42,7 +42,23 @@ ROOT = Path(__file__).parent.parent
 CACHE = ROOT / "data" / "llm_cache"
 RESULTS = ROOT / "results"
 
-MODELS = [("openai", "gpt-4.1"), ("anthropic", "claude-sonnet-4-6")]
+# A5 roster: current models spanning four providers and a frontier-to-small size
+# range. Google's Pro tier is quota-locked on the available key, so Google is
+# represented by two flash generations (documented in the methodology).
+MODELS = [
+    ("anthropic", "claude-opus-4-8"),
+    ("anthropic", "claude-sonnet-4-6"),
+    ("anthropic", "claude-haiku-4-5-20251001"),
+    ("openai", "gpt-5.5"),
+    ("openai", "gpt-5.4-mini"),
+    ("mistral", "mistral-large-latest"),
+    ("mistral", "mistral-small-latest"),
+    ("gemini", "gemini-3.5-flash"),
+    ("gemini", "gemini-2.5-flash"),
+]
+
+# Providers with tighter rate limits get fewer concurrent workers.
+WORKERS = {"anthropic": 8, "openai": 8, "mistral": 3, "gemini": 2}
 
 PANEL = [
     PolicyVerifier(watch_kind="pkg_delta", verifier_id="pv_pkg"),
@@ -64,14 +80,16 @@ def _prompt_b(c) -> str:
               "of the evidence you relied on most.")
 
 
-def _safe_judge(judge: LLMJudge, prompt: str, tries: int = 5) -> dict:
+def _safe_judge(judge: LLMJudge, prompt: str, tries: int = 7) -> dict:
     for attempt in range(tries):
         try:
             return judge.judge(prompt)
         except Exception as e:  # transient API / rate-limit
             if attempt == tries - 1:
                 raise
-            time.sleep(1.5 * (attempt + 1))
+            # back off harder on quota / rate-limit responses (429)
+            slow = "429" in str(e) or "resource_exhausted" in str(e).lower() or "rate" in str(e).lower()
+            time.sleep((5.0 if slow else 1.5) * (attempt + 1))
 
 
 def _cleared(d) -> bool:
@@ -145,8 +163,9 @@ def main(argv: list[str]) -> None:
     out_path = RESULTS / "headline.json"
     existing = json.loads(out_path.read_text()) if out_path.exists() else {"models": []}
     for prov, mod in models:
-        print(f"running {prov}/{mod} over {len(cases)} cases ...", flush=True)
-        r = run_model(prov, mod, cases)
+        workers = WORKERS.get(prov, 8)
+        print(f"running {prov}/{mod} over {len(cases)} cases ({workers} workers) ...", flush=True)
+        r = run_model(prov, mod, cases, workers=workers)
         existing["models"] = [m for m in existing["models"] if m["model"] != r["model"]] + [r]
         out_path.write_text(json.dumps(existing, indent=2), encoding="utf-8")
         ja, ra = r["judge_alone_sub_floor"], r["rails_sub_floor"]

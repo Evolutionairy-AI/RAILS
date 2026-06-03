@@ -43,20 +43,58 @@ class LLMJudge:
 
     def _real_backend(self, prompt: str) -> str:
         from rails_ref.config import load_key
+        msgs = [{"role": "user", "content": prompt}]
         if self.provider == "anthropic":
             from anthropic import Anthropic
             client = Anthropic(api_key=load_key("anthropic"))
-            r = client.messages.create(
-                model=self.model, max_tokens=self.max_tokens, temperature=self.temperature,
-                messages=[{"role": "user", "content": prompt}])
+            base = {"model": self.model, "max_tokens": self.max_tokens, "messages": msgs}
+            try:
+                r = client.messages.create(temperature=self.temperature, **base)
+            except Exception as e:  # newer models (e.g. Opus 4.8) deprecate temperature
+                if "temperature" in str(e).lower():
+                    r = client.messages.create(**base)
+                else:
+                    raise
             return r.content[0].text
         if self.provider == "openai":
             from openai import OpenAI
             client = OpenAI(api_key=load_key("openai"))
+            if self.model.startswith(("gpt-5", "o1", "o3", "o4")):
+                # reasoning-capable models: budget must cover hidden reasoning, only
+                # the default temperature is accepted, and 'minimal' effort is rejected
+                # by some — fall back to default effort if 'low' is unsupported.
+                base = {"model": self.model, "messages": msgs,
+                        "max_completion_tokens": max(self.max_tokens, 2048)}
+                try:
+                    r = client.chat.completions.create(reasoning_effort="low", **base)
+                except Exception as e:
+                    if "reasoning_effort" in str(e).lower():
+                        r = client.chat.completions.create(**base)
+                    else:
+                        raise
+            else:
+                r = client.chat.completions.create(
+                    model=self.model, max_tokens=self.max_tokens,
+                    temperature=self.temperature, messages=msgs)
+            return r.choices[0].message.content
+        if self.provider == "mistral":
+            # Mistral exposes an OpenAI-compatible endpoint.
+            from openai import OpenAI
+            client = OpenAI(api_key=load_key("mistral"), base_url="https://api.mistral.ai/v1")
             r = client.chat.completions.create(
                 model=self.model, max_tokens=self.max_tokens, temperature=self.temperature,
-                messages=[{"role": "user", "content": prompt}])
+                messages=msgs)
             return r.choices[0].message.content
+        if self.provider == "gemini":
+            from google import genai
+            from google.genai import types
+            client = genai.Client(api_key=load_key("gemini"))
+            # Gemini 2.5/3 "think" by default; give output budget room so the visible
+            # verdict survives, and keep thinking minimal on models that allow it.
+            cfg = types.GenerateContentConfig(
+                temperature=self.temperature, max_output_tokens=max(self.max_tokens, 2048))
+            r = client.models.generate_content(model=self.model, contents=prompt, config=cfg)
+            return r.text or ""
         raise ValueError(f"unknown provider: {self.provider}")
 
     @staticmethod
