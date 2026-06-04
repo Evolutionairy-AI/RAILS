@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe self-report is the only evidence; no CI log, diff, or independent artifact is attached to verify the claimed fix or that all 37 tests pass. The acceptance criteria cannot be confirmed from an unverifiable claim."}

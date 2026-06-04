@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "SELF", "raw": "VERDICT: FAIL\nBASIS: SELF\n\nThe self-report describes fixing a different bug (per-key/NAT keying) than the task required (burst-through at window edges), and provides no admissible independent artifact (no CI log, diff, or test output) to verify the claim."}

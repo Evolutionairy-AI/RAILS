@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "ATT", "raw": "VERDICT: FAIL\nBASIS: ATT\n\nThe CI results (ATT - independent attestation) show 2 failed tests out of 52, directly contradicting the acceptance criteria requirement that \"all 52 tests pass.\" The self-report claims success, but the independent test run provides objective evidence of failure."}

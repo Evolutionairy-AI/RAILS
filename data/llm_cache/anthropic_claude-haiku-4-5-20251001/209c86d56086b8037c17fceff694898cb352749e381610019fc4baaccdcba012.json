@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe acceptance criteria requires \"all 44 tests pass\" but the CI results show 2 tests failing (test_quarantine_ordering and test_batch_isolation), with only 42 passing out of 44."}

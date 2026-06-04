@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": "SELF", "raw": "VERDICT: FAIL\nBASIS: SELF\n\nThe self-report is the only evidence, with no independent artifact (CI log, diff, or test output) to verify the claims. Acceptance criteria require demonstrated test passage and eliminated duplicate processing, which cannot be confirmed from an unverifiable self-attestation."}

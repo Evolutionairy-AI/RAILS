@@ -1,0 +1,1 @@
+{"verdict": "FAIL", "basis": null, "raw": "VERDICT: FAIL\n\nThe self-report is the only evidence; no CI log, diff, or independent artifact corroborates the claim that duplicate processing was eliminated or that all 44 tests pass. Acceptance cannot be verified from an unverifiable assertion alone."}
