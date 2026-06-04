@@ -71,15 +71,24 @@ def make() -> None:
     top = [p for p in pts if p[1] > 0.95]
     low = [p for p in pts if p[1] <= 0.95]
     for k, (x, y, prov, name) in enumerate(top):
-        lx = 0.06 + 0.92 * (k + 0.5) / max(len(top), 1)
-        ax.annotate(name, (x, y), textcoords="data", xytext=(lx, 0.86 - 0.05 * (k % 2)),
+        lx = 0.12 + 0.62 * (k + 0.5) / max(len(top), 1)   # fan tightened over the cluster
+        ax.annotate(name, (x, y), textcoords="data", xytext=(lx, 0.87 - 0.055 * (k % 2)),
                     fontsize=8, color=NAVY, ha="center",
                     arrowprops=dict(arrowstyle="-", color=GREY, lw=0.5, shrinkA=2, shrinkB=3))
-    for x, y, prov, name in low:
-        label = f"{name}\n(prior-gen, permissive)" if name in PRIOR_GEN else name
-        ha, dx = ("right", -10) if x > 0.85 else ("left", 10)
-        ax.annotate(label, (x, y), textcoords="offset points", xytext=(dx, 6),
-                    fontsize=8, color=NAVY, ha=ha)
+
+    # the permissive cluster (a current flagship, GPT-4.1, Gemini 2.5 Flash) collides
+    # at the bottom-right if labelled in place; fan it up into the empty mid-right band
+    # with thin leader lines. Mid-plane judges still label in place.
+    crowd = sorted([p for p in low if p[0] > 0.85], key=lambda p: -p[1])
+    rest = [p for p in low if p[0] <= 0.85]
+    for x, y, prov, name in rest:
+        ax.annotate(name, (x, y), textcoords="offset points", xytext=(10, 6),
+                    fontsize=8, color=NAVY, ha="left")
+    for k, (x, y, prov, name) in enumerate(crowd):
+        label = f"{name}  (prior-gen)" if name in PRIOR_GEN else name
+        ax.annotate(label, (x, y), textcoords="data", xytext=(0.99, 0.40 - 0.10 * k),
+                    fontsize=8, color=NAVY, ha="right", va="center",
+                    arrowprops=dict(arrowstyle="-", color=GREY, lw=0.5, shrinkA=2, shrinkB=3))
 
     # arrow tracing the tradeoff the judges are stuck on
     ax.annotate("", xy=(0.96, 0.08), xytext=(0.04, 0.99),

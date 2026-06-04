@@ -19,54 +19,36 @@ def make() -> None:
     base_exp = list(base["exposure_curve_usd_per_10k"].values())
     rails_exp = list(d["rails"]["exposure_curve_usd_per_10k"].values())
     xs = [r * 100 for r in rates]   # percent
-
-    # most permissive judge's decline rate, for the approval-impact pairing
-    decl = {m["model"]: m for m in d["approval_impact_declines_per_10k"]}
     base_model = base["model"]
-    base_decline = decl[base_model]["judge_alone_decline_rate"] if base_model in decl else None
 
     import matplotlib.pyplot as plt
-    fig, ax = plt.subplots(figsize=(8.0, 4.8))
+    fig, ax = plt.subplots(figsize=(8.0, 5.0))
     fig.patch.set_facecolor(IVORY); ax.set_facecolor(IVORY)
+    ax.margins(y=0.14)
 
-    # card-dispute lower-anchor band (~0.5-1%)
+    # card-dispute lower-anchor band (~0.5-1%); labelled at the top so it never
+    # collides with the curve or the per-point value labels (the source anchors and
+    # the approval-impact pairing live in the report caption / prose, not the image)
     ax.axvspan(0.5, 1.0, color=GREY, alpha=0.16, zorder=0)
-    ax.text(0.75, max(base_exp) * 0.55, "card dispute\nrate (~0.5-1%)", fontsize=8,
-            color=NAVY, ha="center", va="center")
+    ax.text(0.75, max(base_exp) * 1.0, "card-dispute\nrate (~0.5-1%)", fontsize=8,
+            color=NAVY, ha="left", va="top")
 
     ax.fill_between(xs, rails_exp, base_exp, color=TERRA, alpha=0.12, zorder=1)
     flagship = " current flagship" if base.get("is_current_flagship") else ""
     ax.plot(xs, base_exp, "-o", color=TERRA, lw=2, zorder=3,
             label=f"permissive{flagship} judge ({base_model.split('/')[-1]}, {base['sub_floor_false_clear_rate']:.0%} false-clear)")
-    ax.plot(xs, rails_exp, "-o", color=GOLD, lw=2, zorder=3, label="RAILS (floor enforcement)")
+    ax.plot(xs, rails_exp, "-o", color=GOLD, lw=2, zorder=3, label="RAILS (floor enforcement, $0)")
     for x, v in zip(xs, base_exp):
-        ax.annotate(f"${v/1000:.0f}k", (x, v), textcoords="offset points", xytext=(0, 7),
+        ax.annotate(f"${v/1000:.0f}k", (x, v), textcoords="offset points", xytext=(0, 8),
                     fontsize=8, color=NAVY, ha="center")
 
     ax.set_xlabel("defect rate among agent settlements (%, swept — no single asserted rate)")
     ax.set_ylabel("cleared-defective exposure, USD per 10k settlements")
     ax.set_title("Exposure of inadmissible-evidence settlements that clear\n"
-                 "($200 per defective settlement; permissive baseline vs RAILS)", fontsize=11)
+                 "($200 per defective settlement; permissive current-flagship baseline vs RAILS)", fontsize=11)
     ax.legend(frameon=False, loc="lower right")
     ax.grid(True, color="#E4DCCB", lw=0.7)
-
-    pair = ""
-    if base_decline is not None:
-        pair = (f"  Approval-impact pairing: this permissive baseline declines only "
-                f"{base_decline:.0%} of legitimate work but carries the exposure above; RAILS' fixed-ATT "
-                f"floor over-declines, which the exposure-variable floor recovers (fig_variable_floor).")
-    worst = d.get("worst_case_judge", {})
-    envelope = ""
-    if worst and worst.get("model") != base_model:
-        envelope = (f"  Baseline is a current flagship ({base_model.split('/')[-1]}); the most-permissive "
-                    f"judge measured ({worst['model'].split('/')[-1]}, {worst['sub_floor_false_clear_rate']:.0%}) "
-                    f"sits even higher. Population: the inadmissible-evidence (sub_floor) slice; loss model: "
-                    f"flat $200 per cleared defective.")
-    fig.text(0.5, 0.005,
-             "Anchors: avg chargeback ~$110 US / $120 travel; card fraud 6.43c per $100 (Nilson 2026); "
-             "dispute cost $9-10 (Mastercard 2025)." + pair + envelope,
-             ha="center", fontsize=7.2, color=NAVY, wrap=True)
-    fig.tight_layout(rect=[0, 0.05, 1, 1])
+    fig.tight_layout()
     save(fig, "fig_loss")
 
 
