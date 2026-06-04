@@ -11,10 +11,12 @@ For each curated case and each judge model, compare two arms on the SAME inputs:
           bases. "Cleared" = emitted with performance PASS AND policy PASS.
           False-clear = a defective case cleared.
 
-The headline contrast is reported overall and on the sub_floor subset (defects
-revealed by ATT evidence while a SELF self-report asserts the work is clean) --
-the class where floor enforcement is expected to win. at_floor cases (revealed
-only by sub-floor WIT evidence) are the honest boundary where RAILS cannot help.
+The headline contrast is reported overall and on the sub_floor subset (a bare
+SELF self-report whose defect lives only in ground truth, with no admissible
+evidence attached) -- the class where floor enforcement is expected to win, since
+RAILS has no verifier meeting the ATT floor and returns UNVERIFIABLE. at_floor
+cases (revealed only by sub-floor WIT evidence) are the honest boundary where
+RAILS cannot help. Dataset is v2 (data/rails_cases_v2.jsonl); see its README.
 
 All judge calls are cached, so reruns are free and need no keys.
 
@@ -126,11 +128,20 @@ def _rate(cases, results, arm, label="defective") -> dict | None:
     subset = [c for c in cases if c.label == label]
     if not subset:
         return None
+    n = len(subset)
     hits = sum(1 for c in subset if results[c.id][arm])
-    lo, hi = wilson_ci(hits, len(subset))
+    rate = hits / n
+    # Honest interval: the effective sample is the number of DISTINCT (task, fix)
+    # scenarios, not the raw case count -- the dataset reuses scenarios across
+    # instances (matched twins), so n cases pseudo-replicate n_eff scenarios. The
+    # point estimate stays per-case; the Wilson CI is computed on n_eff so it is
+    # not falsely tight (e.g. sub_floor: 60 cases over 48 scenarios).
+    keys = {c.scenario_key for c in subset if c.scenario_key}
+    n_eff = len(keys) if keys else n
+    lo, hi = wilson_ci(round(rate * n_eff), n_eff)
     # for defective: hits = false-clears; for clean: hits = correct clears (throughput)
-    return {"hits": hits, "n": len(subset),
-            "rate": round(hits / len(subset), 4), "ci95": [round(lo, 4), round(hi, 4)]}
+    return {"hits": hits, "n": n, "n_eff": n_eff,
+            "rate": round(rate, 4), "ci95": [round(lo, 4), round(hi, 4)]}
 
 
 def run_model(provider: str, model: str, cases, workers: int = 8) -> dict:
