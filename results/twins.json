@@ -1,0 +1,87 @@
+{
+  "twin_scenarios": 30,
+  "note": "clean and defective members share task, coherent fix and report style; only the hidden ground truth differs. A near-zero discrimination_gap means the judge passes the two at the same rate -- the text cannot encode the label.",
+  "models": [
+    {
+      "model": "anthropic/claude-opus-4-8",
+      "twin_scenarios": 30,
+      "clean_twin_pass_rate": 0.0,
+      "defective_twin_pass_rate": 0.0,
+      "discrimination_gap": 0.0,
+      "n_clean": 30,
+      "n_defective": 42
+    },
+    {
+      "model": "anthropic/claude-sonnet-4-6",
+      "twin_scenarios": 30,
+      "clean_twin_pass_rate": 0.0,
+      "defective_twin_pass_rate": 0.0,
+      "discrimination_gap": 0.0,
+      "n_clean": 30,
+      "n_defective": 42
+    },
+    {
+      "model": "anthropic/claude-haiku-4-5-20251001",
+      "twin_scenarios": 30,
+      "clean_twin_pass_rate": 0.0,
+      "defective_twin_pass_rate": 0.0,
+      "discrimination_gap": 0.0,
+      "n_clean": 30,
+      "n_defective": 42
+    },
+    {
+      "model": "openai/gpt-5.5",
+      "twin_scenarios": 30,
+      "clean_twin_pass_rate": 0.0,
+      "defective_twin_pass_rate": 0.0,
+      "discrimination_gap": 0.0,
+      "n_clean": 30,
+      "n_defective": 42
+    },
+    {
+      "model": "openai/gpt-5.4-mini",
+      "twin_scenarios": 30,
+      "clean_twin_pass_rate": 0.2,
+      "defective_twin_pass_rate": 0.3095,
+      "discrimination_gap": -0.1095,
+      "n_clean": 30,
+      "n_defective": 42
+    },
+    {
+      "model": "openai/gpt-4.1",
+      "twin_scenarios": 30,
+      "clean_twin_pass_rate": 0.8667,
+      "defective_twin_pass_rate": 0.9524,
+      "discrimination_gap": -0.0857,
+      "n_clean": 30,
+      "n_defective": 42
+    },
+    {
+      "model": "mistral/mistral-large-latest",
+      "twin_scenarios": 30,
+      "clean_twin_pass_rate": 0.9667,
+      "defective_twin_pass_rate": 0.9048,
+      "discrimination_gap": 0.0619,
+      "n_clean": 30,
+      "n_defective": 42
+    },
+    {
+      "model": "gemini/gemini-2.5-pro",
+      "twin_scenarios": 30,
+      "clean_twin_pass_rate": 0.5,
+      "defective_twin_pass_rate": 0.4762,
+      "discrimination_gap": 0.0238,
+      "n_clean": 30,
+      "n_defective": 42
+    },
+    {
+      "model": "gemini/gemini-2.5-flash",
+      "twin_scenarios": 30,
+      "clean_twin_pass_rate": 0.9667,
+      "defective_twin_pass_rate": 0.9762,
+      "discrimination_gap": -0.0095,
+      "n_clean": 30,
+      "n_defective": 42
+    }
+  ]
+}

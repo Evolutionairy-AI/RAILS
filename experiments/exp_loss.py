@@ -55,10 +55,15 @@ def main() -> None:
     h = json.loads((RESULTS / "headline.json").read_text())
     models = h["models"]
 
-    # The realistic no-RAILS baseline is the most permissive judge measured on the
-    # inadmissible-evidence (self-report) slice -- the deployment a throughput-tuned
-    # operator would actually ship.
-    baseline = max(models, key=lambda m: m["judge_alone_sub_floor"]["rate"])
+    # The realistic no-RAILS baseline is a permissive CURRENT FLAGSHIP -- the
+    # deployment a throughput-tuned operator would actually ship. We lead with a
+    # current flagship (Mistral Large) rather than the most-permissive small or
+    # prior-gen model, so the exposure cannot be dismissed as an artifact of a weak
+    # model. The most-permissive judge measured is reported alongside as the upper
+    # envelope. Falls back to most-permissive if the preferred model was not run.
+    PREFERRED_BASELINE = "mistral/mistral-large-latest"
+    most_permissive = max(models, key=lambda m: m["judge_alone_sub_floor"]["rate"])
+    baseline = next((m for m in models if m["model"] == PREFERRED_BASELINE), most_permissive)
     base_fc = baseline["judge_alone_sub_floor"]["rate"]
 
     out = {
@@ -66,8 +71,13 @@ def main() -> None:
                         "defect_rates_swept": DEFECT_RATES, "sources": SOURCES},
         "baseline_judge": {
             "model": baseline["model"],
+            "is_current_flagship": baseline["model"] == PREFERRED_BASELINE,
             "sub_floor_false_clear_rate": base_fc,
             "exposure_curve_usd_per_10k": {f"{r:.3f}": _exposure(base_fc, r) for r in DEFECT_RATES},
+        },
+        "worst_case_judge": {
+            "model": most_permissive["model"],
+            "sub_floor_false_clear_rate": most_permissive["judge_alone_sub_floor"]["rate"],
         },
         "rails": {
             # RAILS clears zero inadmissible-evidence defectives for every judge,

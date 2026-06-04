@@ -35,8 +35,9 @@ def make() -> None:
             color=NAVY, ha="center", va="center")
 
     ax.fill_between(xs, rails_exp, base_exp, color=TERRA, alpha=0.12, zorder=1)
+    flagship = " current flagship" if base.get("is_current_flagship") else ""
     ax.plot(xs, base_exp, "-o", color=TERRA, lw=2, zorder=3,
-            label=f"permissive judge ({base_model.split('/')[-1]}, {base['sub_floor_false_clear_rate']:.0%} false-clear)")
+            label=f"permissive{flagship} judge ({base_model.split('/')[-1]}, {base['sub_floor_false_clear_rate']:.0%} false-clear)")
     ax.plot(xs, rails_exp, "-o", color=GOLD, lw=2, zorder=3, label="RAILS (floor enforcement)")
     for x, v in zip(xs, base_exp):
         ax.annotate(f"${v/1000:.0f}k", (x, v), textcoords="offset points", xytext=(0, 7),
@@ -54,9 +55,16 @@ def make() -> None:
         pair = (f"  Approval-impact pairing: this permissive baseline declines only "
                 f"{base_decline:.0%} of legitimate work but carries the exposure above; RAILS' fixed-ATT "
                 f"floor over-declines, which the exposure-variable floor recovers (fig_variable_floor).")
+    worst = d.get("worst_case_judge", {})
+    envelope = ""
+    if worst and worst.get("model") != base_model:
+        envelope = (f"  Baseline is a current flagship ({base_model.split('/')[-1]}); the most-permissive "
+                    f"judge measured ({worst['model'].split('/')[-1]}, {worst['sub_floor_false_clear_rate']:.0%}) "
+                    f"sits even higher. Population: the inadmissible-evidence (sub_floor) slice; loss model: "
+                    f"flat $200 per cleared defective.")
     fig.text(0.5, 0.005,
              "Anchors: avg chargeback ~$110 US / $120 travel; card fraud 6.43c per $100 (Nilson 2026); "
-             "dispute cost $9-10 (Mastercard 2025)." + pair,
+             "dispute cost $9-10 (Mastercard 2025)." + pair + envelope,
              ha="center", fontsize=7.2, color=NAVY, wrap=True)
     fig.tight_layout(rect=[0, 0.05, 1, 1])
     save(fig, "fig_loss")

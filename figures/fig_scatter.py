@@ -3,14 +3,18 @@
 x = throughput   (share of legitimate work the judge clears; higher better)
 y = soundness    (1 - false-clear on inadmissible-evidence defectives; higher better)
 
-The judges trace a tradeoff: a permissive judge (e.g. the prior-generation GPT-4.1)
-buys high throughput at low soundness; the cautious current models buy soundness by
-over-declining (down to 0% throughput). No judge reaches the top-right governed
+The judges trace a tradeoff: permissive judges (a current flagship like Mistral
+Large, the prior-generation GPT-4.1, the small Gemini 2.5 Flash) buy high throughput
+at low soundness; the soundness-safe judges (the Anthropic models, GPT-5.5) buy it by
+over-declining, capping throughput near 50%. No judge reaches the top-right governed
 corner. RAILS holds the soundness ceiling (y = 1.0, a guaranteed invariant) at
 whatever throughput the exposure-variable floor policy targets -- so the whole top
 edge is available to RAILS by policy, while the judges are stuck on the frontier
 below. The claim is governance, not a benchmark win: the judge's disposition is
 model-dependent and ungoverned; RAILS's soundness is proven and model-independent.
+
+Population: this plane is the inadmissible-evidence (sub_floor) slice. x is computed
+on the full clean set; y on the sub_floor defectives.
 
 Honest boundary (kept visible, per A9): this plane is the inadmissible-evidence
 (sub_floor) slice. On the at_floor slice -- defects revealed only by sub-floor

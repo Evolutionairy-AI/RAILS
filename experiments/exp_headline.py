@@ -69,7 +69,7 @@ MODELS = [
 
 # Providers with tighter rate limits get fewer concurrent workers. Gemini is on a
 # paid key now, so it can take real concurrency.
-WORKERS = {"anthropic": 8, "openai": 8, "mistral": 6, "gemini": 8}
+WORKERS = {"anthropic": 8, "openai": 8, "mistral": 3, "gemini": 8}
 
 PANEL = [
     PolicyVerifier(watch_kind="pkg_delta", verifier_id="pv_pkg"),
