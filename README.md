@@ -55,9 +55,20 @@ Three points were underspecified in the paper and resolved here with documented 
 
 This repository accompanies the RAILS paper:
 
-> *RAILS: A Verification-Native Clearinghouse Protocol for Autonomous Agent Obligations.* Evolutionairy AI / RAILS Initiative. arXiv preprint (identifier to be added on posting).
+> Adrian de Valois-Franklin and Alex Bogdan. *RAILS: Verification-Native Clearing for Agentic Commerce.* arXiv:2606.08790, 2026. https://arxiv.org/abs/2606.08790
 
-The arXiv identifier will be added here and to the repository description once the preprint is posted. If you use the harness or the dataset, please cite the paper.
+```bibtex
+@misc{rails2026,
+  title         = {{RAILS}: Verification-Native Clearing for Agentic Commerce},
+  author        = {de Valois-Franklin, Adrian and Bogdan, Alex},
+  year          = {2026},
+  eprint        = {2606.08790},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI}
+}
+```
+
+If you use the harness or the dataset, please cite the paper.
 
 ## License
 
